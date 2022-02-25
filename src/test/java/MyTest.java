@@ -1,15 +1,20 @@
 import org.junit.Test;
+import util.RegexUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MyTest {
     @Test
-    public void email(){
-        String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
-        Pattern regex = Pattern.compile(check);
-        Matcher matcher = regex.matcher("dffdfdf@a.com");
-        boolean isMatched = matcher.matches();
-        System.out.println(isMatched);
+    public void test01(){
+        String email="1436216510@qq.com";
+        String email2="adw5a1@qq.com";
+        String email3="111@aa.aa";
+        boolean a=RegexUtil.emailRegex(email);
+        boolean b=RegexUtil.emailRegex(email2);
+        boolean c=RegexUtil.emailRegex(email3);
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
     }
 }
