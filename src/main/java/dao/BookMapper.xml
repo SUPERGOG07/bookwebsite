@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.BookMapper">
+    <select id="selectAllBooks" resultType="Books">
+        select * from bookweb.books
+    </select>
+
+    <select id="selectBookByName" parameterType="java.lang.String" resultType="Books">
+        select * from bookweb.books
+        where name = #{name}
+    </select>
+
+    <select id="selectBookBySort" parameterType="java.lang.String" resultType="Books">
+        select * from bookweb.books
+        where sort = #{sort}
+    </select>
+
+    <insert id="insertBook" parameterType="Books">
+        insert into bookweb.books(name,ptUrl,txUrl,sumIntro,sort)
+        values (#{name},#{ptUrl},#{txUrl},
+                #{sumIntro},#{sort})
+    </insert>
+
+    <delete id="deleteBook" parameterType="java.lang.String">
+        delete from bookweb.books
+        where name=#{name}
+    </delete>
+
+    <update id="updateBook" parameterType="Books">
+        update bookweb.books
+        set name=#{name},ptUrl=#{ptUrl},
+            txtUrl=#{txtUrl},sumIntro=#{sumIntro}
+    </update>
+
+</mapper>

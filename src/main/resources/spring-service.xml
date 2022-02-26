@@ -15,6 +15,9 @@
     <bean id="AdminServiceImpl" class="service.AdminServiceImpl">
         <property name="adminMapper" ref="adminMapper"/>
     </bean>
+    <bean id="BookServiceImpl" class="service.BookServiceImpl">
+        <property name="bookMapper" ref="bookMapper"/>
+    </bean>
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- 注入数据库连接池 -->

@@ -40,8 +40,6 @@ public class UserController {
         }
 
         if(RegexUtil.emailRegex(email)){                        //不是管理员，则验证邮箱正则
-
-
             if(userService.login(email, pwd)!=null){                              //验证是否是已注册用户
                 System.out.println("login");
                 User user=new User(userService.login(email, pwd).getTleNum(),email,pwd);
@@ -54,7 +52,6 @@ public class UserController {
         else{
             return ResultUtil.error("邮箱格式错误");          //邮箱格式错误，报错
         }
-
     }
 
 
@@ -74,8 +71,6 @@ public class UserController {
         else {
             return ResultUtil.error("格式错误，清检查格式");
         }
-
-
     }
 
 

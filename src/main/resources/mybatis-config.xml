@@ -11,6 +11,7 @@
     <mappers>
         <mapper class="dao.UserMapper"/>
         <mapper class="dao.AdminMapper"/>
+        <mapper class="dao.BookMapper"/>
     </mappers>
 
 </configuration>
