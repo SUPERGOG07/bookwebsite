@@ -6,7 +6,6 @@ import pojo.Admin;
 import pojo.User;
 import service.AdminService;
 import service.UserService;
-import service.UserServiceImpl;
 import util.RegexUtil;
 import util.Result;
 import util.ResultUtil;
@@ -67,7 +66,7 @@ public class UserController {
             }
             User user=new User(tleNum,email,pwd);
             if(userService.register(user)!=-1){
-                System.out.println(email+"register successfully");
+                System.out.println(email+"  "+"register successfully");
                 return ResultUtil.data(null,"注册成功");
             }
             return ResultUtil.error("注册失败");

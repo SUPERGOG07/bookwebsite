@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Books {
     String name;
-    String ptuUrl;
+    String ptUrl;
     String txtUrl;
     String sumIntro;
     String sort;
+    String author;
 }

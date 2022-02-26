@@ -1,7 +1,7 @@
 package service;
 
 
-import org.springframework.stereotype.Service;
+
 import pojo.User;
 
 
@@ -15,5 +15,4 @@ public interface UserService {
 
     //check
     User checkUser(String email);
-
 }

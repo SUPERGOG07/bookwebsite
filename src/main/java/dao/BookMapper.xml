@@ -21,7 +21,7 @@
     <insert id="insertBook" parameterType="Books">
         insert into bookweb.books(name,ptUrl,txUrl,sumIntro,sort)
         values (#{name},#{ptUrl},#{txUrl},
-                #{sumIntro},#{sort})
+                #{sumIntro},#{sort},#{author})
     </insert>
 
     <delete id="deleteBook" parameterType="java.lang.String">
@@ -31,8 +31,13 @@
 
     <update id="updateBook" parameterType="Books">
         update bookweb.books
-        set name=#{name},ptUrl=#{ptUrl},
-            txtUrl=#{txtUrl},sumIntro=#{sumIntro}
+        set name=#{name},ptUrl=#{ptUrl},txtUrl=#{txtUrl},
+            sumIntro=#{sumIntro},sort=#{sort},author=#{author}
+
     </update>
+
+    <select id="selectBookByLimit" parameterType="map" resultType="Books">
+        select * from bookweb.books limit #{startIndex},#{pageSize}
+    </select>
 
 </mapper>

@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import pojo.Books;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BookMapper {
@@ -25,5 +26,8 @@ public interface BookMapper {
 
     //update book
     int updateBook(Books book);
+
+    //limit select book
+    List<Books> selectBookByLimit(Map<String,Integer> map);
 
 }
