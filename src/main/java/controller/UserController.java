@@ -6,6 +6,7 @@ import pojo.Admin;
 import pojo.User;
 import service.AdminService;
 import service.UserService;
+import service.UserServiceImpl;
 import util.RegexUtil;
 import util.Result;
 import util.ResultUtil;
@@ -39,11 +40,11 @@ public class UserController {
         }
 
         if(RegexUtil.emailRegex(email)){                        //不是管理员，则验证邮箱正则
-            User user = new User(0,email,pwd);
 
-            if(userService.login(user)!=null){                              //验证是否是已注册用户
+
+            if(userService.login(email, pwd)!=null){                              //验证是否是已注册用户
                 System.out.println("login");
-                user.setTleNum(userService.login(user).getTleNum());
+                User user=new User(userService.login(email, pwd).getTleNum(),email,pwd);
                 return ResultUtil.data(user);                               //是，返回用户信息
             }
             else {
@@ -55,6 +56,28 @@ public class UserController {
         }
 
     }
+
+
+    //register
+    @RequestMapping("/register/{tleNum}/{email}/{pwd}")
+    public Result register(@PathVariable int tleNum,@PathVariable String email,@PathVariable String pwd){
+        System.out.println(tleNum+" "+email+" "+pwd);
+
+        if(RegexUtil.tleAndEmailAndPwdRegex(tleNum,email,pwd)){
+            User user=new User(tleNum,email,pwd);
+            if(userService.register(user)!=-1){
+                System.out.println(email+"register successfully");
+                return ResultUtil.data(null,"注册成功");
+            }
+            return ResultUtil.error("注册失败");
+        }
+        else {
+            return ResultUtil.error("格式错误，清检查格式");
+        }
+
+
+    }
+
 
 
 

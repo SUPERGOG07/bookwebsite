@@ -5,9 +5,14 @@
 
 <mapper namespace="dao.UserMapper">
         
-    <select id="login" parameterType="User" resultType="User">
+    <select id="login" resultType="User">
         select * from bookweb.user
         where email=#{email} and pwd=#{pwd}
     </select>
+
+    <insert id="register" parameterType="User" >
+        insert into bookweb.user(tleNum,email,pwd)
+        values (#{tleNum},#{email},#{pwd})
+    </insert>
     
 </mapper>

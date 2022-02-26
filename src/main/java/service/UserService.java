@@ -8,7 +8,9 @@ import pojo.User;
 public interface UserService {
 
     //login
-    User login(User user);
+    User login(String email,String pwd);
 
+    //register
+    int register(User user);
 
 }

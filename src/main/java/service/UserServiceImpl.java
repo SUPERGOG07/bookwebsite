@@ -1,6 +1,7 @@
 package service;
 
 import dao.UserMapper;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.User;
 
 public class UserServiceImpl implements UserService{
@@ -11,8 +12,15 @@ public class UserServiceImpl implements UserService{
         this.userMapper = userMapper;
     }
 
+    @Transactional
     @Override
-    public User login(User user) {
-        return userMapper.login(user);
+    public User login(String email,String pwd)  throws RuntimeException {
+        return userMapper.login(email,pwd);
+    }
+
+    @Transactional
+    @Override
+    public int register(User user) throws RuntimeException {
+        return userMapper.register(user);
     }
 }

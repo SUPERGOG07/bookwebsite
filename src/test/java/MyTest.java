@@ -1,4 +1,8 @@
+import dao.UserMapper;
 import org.junit.Test;
+import pojo.User;
+import service.UserService;
+import service.UserServiceImpl;
 import util.RegexUtil;
 
 import java.util.regex.Matcher;
@@ -16,5 +20,11 @@ public class MyTest {
         System.out.println(a);
         System.out.println(b);
         System.out.println(c);
+    }
+
+    @Test
+    public void test02(){
+        boolean result=(true^true);
+        System.out.println(result);
     }
 }
