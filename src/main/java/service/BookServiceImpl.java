@@ -1,7 +1,10 @@
 package service;
 
 import dao.BookMapper;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.Books;
+
+import java.util.List;
 
 public class BookServiceImpl implements BookService{
 
@@ -11,5 +14,9 @@ public class BookServiceImpl implements BookService{
         this.bookMapper = bookMapper;
     }
 
-
+    @Transactional
+    @Override
+    public List<Books> selectAllBooks() {
+        return bookMapper.selectAllBooks();
+    }
 }

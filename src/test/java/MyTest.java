@@ -24,7 +24,7 @@ public class MyTest {
 
     @Test
     public void test02(){
-        boolean result=(true^true);
+        boolean result=(true&&false);
         System.out.println(result);
     }
 }

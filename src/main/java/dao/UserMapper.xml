@@ -14,5 +14,10 @@
         insert into bookweb.user(tleNum,email,pwd)
         values (#{tleNum},#{email},#{pwd})
     </insert>
+
+    <select id="checkUser" parameterType="java.lang.String" resultType="User">
+        select * from bookweb.user
+        where email=#{email}
+    </select>
     
 </mapper>

@@ -56,11 +56,15 @@ public class UserController {
 
 
     //register
-    @RequestMapping("/register/{tleNum}/{email}/{pwd}")
-    public Result register(@PathVariable int tleNum,@PathVariable String email,@PathVariable String pwd){
+    @RequestMapping(value = "/register/{tleNum}/{email}/{pwd}",method = {RequestMethod.POST})
+    public Result register(@PathVariable("tleNum") long tleNum,@PathVariable("email") String email,@PathVariable("pwd") String pwd){
         System.out.println(tleNum+" "+email+" "+pwd);
 
         if(RegexUtil.tleAndEmailAndPwdRegex(tleNum,email,pwd)){
+            System.out.println("regex-yes");
+            if(userService.checkUser(email)!=null){
+                return ResultUtil.error(" 已注册");
+            }
             User user=new User(tleNum,email,pwd);
             if(userService.register(user)!=-1){
                 System.out.println(email+"register successfully");

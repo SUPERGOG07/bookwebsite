@@ -13,6 +13,9 @@ public interface UserMapper {
     //register
     int register(User user);
 
+    //check
+    User checkUser(@Param("email") String email);
+
 
 
 }

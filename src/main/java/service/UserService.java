@@ -13,4 +13,7 @@ public interface UserService {
     //register
     int register(User user);
 
+    //check
+    User checkUser(String email);
+
 }

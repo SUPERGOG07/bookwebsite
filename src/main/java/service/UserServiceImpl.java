@@ -23,4 +23,10 @@ public class UserServiceImpl implements UserService{
     public int register(User user) throws RuntimeException {
         return userMapper.register(user);
     }
+
+    @Transactional
+    @Override
+    public User checkUser(String email) {
+        return userMapper.checkUser(email);
+    }
 }
