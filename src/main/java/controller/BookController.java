@@ -21,7 +21,7 @@ public class BookController {
     BookService bookService;
 
     //get books
-    @RequestMapping(value = "/books",method = {RequestMethod.POST})
+    @RequestMapping(value = "/books",method = {RequestMethod.GET})
     public Result getBook(){
         if(bookService.selectAllBooks()!=null){
             List<Books> booksList = bookService.selectAllBooks();
@@ -41,7 +41,7 @@ public class BookController {
     }
 
     //get books by limit
-    @RequestMapping(value = "/books/limit/{index}",method = {RequestMethod.POST})
+        @RequestMapping(value = "/books/limit/{index}",method = {RequestMethod.POST})
     public Result getBookByLimit(@PathVariable int index){
         int pageSize=4;
         if(bookService.selectBookByLimit(index,pageSize)!=null){

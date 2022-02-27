@@ -15,7 +15,4 @@ public interface UserMapper {
 
     //check
     User checkUser(@Param("email") String email);
-
-
-
 }
