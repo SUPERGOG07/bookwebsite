@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ShelfMapper">
+
+    <select id="viewShelf" parameterType="java.lang.String" resultType="Books">
+        select b.* from bookweb.books b
+        inner join bookweb.bookshelf s
+        on b.bookName = s.bookName
+        where s.email = #{email}
+    </select>
+
+    <insert id="shelfAdd" >
+        insert into bookweb.bookshelf(email,bookName)
+        values (#{email},#{bookName})
+    </insert>
+
+    <select id="shelfCheck" resultType="java.lang.String">
+        select s.bookName from bookweb.bookshelf s
+        where s.email=#{email} and s.bookName =#{bookName}
+    </select>
+
+    <delete id="shelfDelete" >
+        delete from bookweb.bookshelf
+        where email=#{email} and bookName=#{bookName}
+    </delete>
+
+
+</mapper>

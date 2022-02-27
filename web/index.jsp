@@ -11,6 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Hello</h1>
+<form action="/bookwebsite_war_exploded/download" method="post">
+    <input type="text" name="fileName"><br><br><br>
+    <input type="submit" value="download">
+</form>
 </body>
 </html>
