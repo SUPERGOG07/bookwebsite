@@ -10,4 +10,5 @@
         where email=#{email} and pwd=#{pwd}
     </select>
 
+
 </mapper>

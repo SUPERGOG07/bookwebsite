@@ -10,7 +10,7 @@
 
     <select id="selectBookByName" parameterType="java.lang.String" resultType="Books">
         select * from bookweb.books
-        where name = #{name}
+        where bookName = #{name}
     </select>
 
     <select id="selectBookBySort" parameterType="java.lang.String" resultType="Books">
@@ -19,22 +19,16 @@
     </select>
 
     <insert id="insertBook" parameterType="Books">
-        insert into bookweb.books(name,ptUrl,txUrl,sumIntro,sort)
-        values (#{name},#{ptUrl},#{txUrl},
-                #{sumIntro},#{sort},#{author})
+        insert into bookweb.books(bookName,ptUrl,txUrl,sumIntro,sort,author,oncheck)
+        values (#{bookName},#{ptUrl},#{txUrl},
+                #{sumIntro},#{sort},#{author},#{oncheck})
     </insert>
 
     <delete id="deleteBook" parameterType="java.lang.String">
         delete from bookweb.books
-        where name=#{name}
+        where bookNname=#{bookName}
     </delete>
 
-    <update id="updateBook" parameterType="Books">
-        update bookweb.books
-        set name=#{name},ptUrl=#{ptUrl},txtUrl=#{txtUrl},
-            sumIntro=#{sumIntro},sort=#{sort},author=#{author}
-
-    </update>
 
     <select id="selectBookByLimit" parameterType="map" resultType="Books">
         select * from bookweb.books limit #{startIndex},#{pageSize}

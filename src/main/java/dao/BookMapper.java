@@ -24,8 +24,6 @@ public interface BookMapper {
     //delete book
     int deleteBook(String name);
 
-    //update book
-    int updateBook(Books book);
 
     //limit select book
     List<Books> selectBookByLimit(Map<String,Integer> map);

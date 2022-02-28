@@ -11,7 +11,6 @@ import java.net.URLEncoder;
 public class FileUtil {
 
     public static String upload(MultipartFile file, HttpServletRequest request) throws IOException {
-        System.out.println("2");
         String fileName = file.getOriginalFilename();
         if("".equals(fileName)){
             return "空文件异常";

@@ -11,10 +11,10 @@ public class RegexUtil {
         Matcher matcher = regex.matcher(email);
         return  matcher.matches();
     }
-    public static boolean tleNumRegex(long tleNum){
+    public static boolean tleNumRegex(String tleNum){
         String check = "^1[3|4|5|7|8]\\d{9}$";
         Pattern regex = Pattern.compile(check);
-        Matcher matcher = regex.matcher(tleNum+"");
+        Matcher matcher = regex.matcher(tleNum);
         return matcher.matches();
     }
     public static boolean pwdRegex(String pwd){
@@ -27,7 +27,7 @@ public class RegexUtil {
         return matcher1.matches()&&matcher2.matches();
 
     }
-    public static String tleAndEmailAndPwdRegex(long tleNum,String email,String pwd){
+    public static String tleAndEmailAndPwdRegex(String tleNum,String email,String pwd){
         if(!tleNumRegex(tleNum)){
             return "tleNum";
         }

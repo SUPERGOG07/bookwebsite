@@ -67,7 +67,7 @@ public class UserController {
 
     //register
     @RequestMapping(value = "/register/{tleNum}/{email}/{pwd}",method = {RequestMethod.POST})
-    public Result register(@PathVariable("tleNum") long tleNum,@PathVariable("email") String email,@PathVariable("pwd") String pwd){
+    public Result register(@PathVariable("tleNum") String tleNum,@PathVariable("email") String email,@PathVariable("pwd") String pwd){
         System.out.println(tleNum+" "+email+" "+pwd);
 
         if(RegexUtil.tleAndEmailAndPwdRegex(tleNum,email,pwd).equals("true")){
