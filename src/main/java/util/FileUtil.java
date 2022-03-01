@@ -87,7 +87,7 @@ public class FileUtil {
     }
 
     public static String delete(HttpServletRequest request, String url) {
-        String path = request.getSession().getServletContext().getRealPath("/upload")+url;
+        String path = request.getSession().getServletContext().getRealPath("/upload")+"\\"+url;
         File file = new File(path);
         if (!file.exists()) {
             return "文件不存在";
