@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import service.AdminService;
+import service.BookService;
 import util.FileUtil;
 import util.Result;
 import util.ResultUtil;
@@ -20,6 +21,10 @@ public class AdminController {
     @Autowired
     @Qualifier("AdminServiceImpl")
     AdminService adminService;
+
+    @Autowired
+    @Qualifier("BookServiceImpl")
+    BookService bookService;
 
     //checkBook
     @RequestMapping(value = "/checkbook",method = {RequestMethod.GET})
@@ -43,7 +48,8 @@ public class AdminController {
     @RequestMapping(value = "/notpass/{bookName}/{author}",method = {RequestMethod.POST})
     public Result notPass(HttpServletRequest request,@PathVariable String bookName,@PathVariable String author){
         if(adminService.notPassBook(bookName,author)!=-1){
-            String result = FileUtil.delete(request, bookName, author);
+            String url = bookService.getUrl(bookName,author);
+            String result = FileUtil.delete(request, url);
             if(result.equals("success")){
                 return ResultUtil.data(null,"删除成功");
             }
