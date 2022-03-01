@@ -10,7 +10,7 @@ public interface AdminService {
     Admin adminLogin(Admin admin);
 
     //check book
-    List<Books> checkBook(int index);
+    List<Books> checkBook();
 
     //check book -- pass
     int passBook(String bookName,String author);

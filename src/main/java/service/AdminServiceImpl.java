@@ -23,8 +23,8 @@ public class AdminServiceImpl implements AdminService{
 
     @Transactional
     @Override
-    public List<Books> checkBook(int index) {
-        return adminMapper.checkBook(index);
+    public List<Books> checkBook() {
+        return adminMapper.checkBook();
     }
 
     @Transactional

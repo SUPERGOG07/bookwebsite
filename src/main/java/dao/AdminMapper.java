@@ -14,7 +14,7 @@ public interface AdminMapper {
     Admin adminLogin(Admin admin);
 
     //check book
-    List<Books> checkBook(int index);
+    List<Books> checkBook();
 
     //check book -- pass
     int passBook(@Param("bookName") String bookName,@Param("author") String author);
