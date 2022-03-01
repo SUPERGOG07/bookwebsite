@@ -1,5 +1,6 @@
 package util;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,40 +11,47 @@ import java.net.URLEncoder;
 
 public class FileUtil {
 
-    public static String upload(MultipartFile file, HttpServletRequest request,String author) throws IOException {
-        if("".equals(file.getOriginalFilename())){
-            return "空文件异常";
+    public static String upload(MultipartFile file, HttpServletRequest request) throws IOException {
+        String originFileName = file.getOriginalFilename();
+        if ("".equals(originFileName)) {
+            return "400";    //空文件异常
         }
-        String fileName = file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4)+"BY"+author+".txt";
-        System.out.println("上传文件:"+fileName);
+        if(FilenameUtils.getExtension(originFileName)!="txt"){
+            if(FilenameUtils.getExtension(originFileName)!="pdf"){
+                if (FilenameUtils.getExtension(originFileName)!="docx"){
+                    return "401";
+                }
+            }
+        }
+        String fileName = System.currentTimeMillis() + originFileName;
+        System.out.println("上传文件:" + fileName);
         String path = request.getSession().getServletContext().getRealPath("/upload");
         File realPath = new File(path);
-        if (!realPath.exists()){
+        if (!realPath.exists()) {
             realPath.mkdir();
         }
-        System.out.println("上传文件保存地址："+realPath);
+        System.out.println("上传文件保存地址：" + realPath);
 
         InputStream is = file.getInputStream(); //文件输入流
-        OutputStream os = new FileOutputStream(new File(realPath,fileName));
-        try{
-            int len=0;
+        OutputStream os = new FileOutputStream(new File(realPath, fileName));
+        try {
+            int len = 0;
             byte[] buffer = new byte[1024];
-            while((len=is.read(buffer))!=-1){
-                os.write(buffer,0,len);
+            while ((len = is.read(buffer)) != -1) {
+                os.write(buffer, 0, len);
                 os.flush();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-            return "上传失败";
-        }
-        finally {
+            return "500";      //上传失败
+        } finally {
             is.close();
             os.close();
         }
-        return "upload-success";
+        return fileName;
     }
 
-    public static String download(HttpServletResponse response,HttpServletRequest request,String fileName) throws IOException{
+    public static String download(HttpServletResponse response, HttpServletRequest request, String fileName) throws IOException {
         String path = request.getSession().getServletContext().getRealPath("/upload");
 
         //1、设置response 响应头
@@ -51,26 +59,26 @@ public class FileUtil {
         response.setCharacterEncoding("UTF-8"); //字符编码
         response.setContentType("application/octet-stream;charset=UTF-8"); //二进制传输数据
         //设置响应头
-        response.setHeader("Content-Disposition","attachment;fileName="+ URLEncoder.encode(fileName, "UTF-8"));
+        response.setHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode(fileName, "UTF-8"));
 
-        File file = new File(path,fileName);
+        File file = new File(path, fileName);
         //2、 读取文件--输入流
-        InputStream input=new FileInputStream(file);
+        InputStream input = new FileInputStream(file);
         //3、 写出文件--输出流
         OutputStream out = response.getOutputStream();
 
-        try{
-            byte[] buff =new byte[1024];
-            int index=0;
+        try {
+            byte[] buff = new byte[1024];
+            int index = 0;
             //4、执行 写出操作
-            while((index= input.read(buff))!= -1){
+            while ((index = input.read(buff)) != -1) {
                 out.write(buff, 0, index);
                 out.flush();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return "下载失败";
-        }finally {
+        } finally {
             out.close();
             input.close();
         }
@@ -78,18 +86,20 @@ public class FileUtil {
 
     }
 
-    public static String delete(HttpServletRequest request,String bookName,String author){
-        String path=request.getSession().getServletContext().getRealPath("/upload");
+    public static String delete(HttpServletRequest request, String bookName, String author) {
+        String path = request.getSession().getServletContext().getRealPath("/upload");
         File file = new File(path);
-        if(!file.exists()){
+        if (!file.exists()) {
             return "文件不存在";
-        }
-        else if(file.isFile()){
+        } else if (file.isFile()) {
             file.delete();
             return "success";
-        }else {
+        } else {
             return "删除失败";
         }
     }
+
+
+
 
 }

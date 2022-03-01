@@ -59,8 +59,20 @@ public class BookServiceImpl implements BookService{
         return bookMapper.riseHot(bookName, author);
     }
 
+    @Transactional
     @Override
     public List<Books> selectByHot() {
         return bookMapper.selectByHot();
+    }
+
+    @Override
+    public int setUrl(String bookName, String author, String url) {
+        return bookMapper.setUrl(bookName, author, url);
+    }
+
+    @Transactional
+    @Override
+    public String getUrl(String bookName,String author) {
+        return bookMapper.getUrl(bookName,author);
     }
 }

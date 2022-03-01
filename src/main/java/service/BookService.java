@@ -26,4 +26,10 @@ public interface BookService {
 
     //select by hot
     List<Books> selectByHot();
+
+    //setUrl
+    int setUrl(String bookName,String author,String url);
+
+    //getUrl
+    String getUrl(String bookName,String author);
 }

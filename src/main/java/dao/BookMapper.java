@@ -36,4 +36,10 @@ public interface BookMapper {
 
     //select by hot
     List<Books> selectByHot();
+
+    //setUrl
+    int setUrl(@Param("bookName")String bookName,@Param("author")String author,@Param("url")String url);
+
+    //getUrl
+    String getUrl(@Param("bookName") String bookName,@Param("author") String author);
 }

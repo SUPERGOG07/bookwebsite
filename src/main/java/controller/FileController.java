@@ -44,14 +44,19 @@ public class FileController {
         }
         Books book = new Books(name,null,intro,sort,author,"T",0);
 
-        String result= FileUtil.upload(file,request,author);
-        if(result.equals("upload-success")){
-            bookService.insertBook(book);
-            System.out.println("upload-success");
-            return ResultUtil.data(null,result);
+        String result= FileUtil.upload(file,request);
+        if(result.equals("400")){
+            return ResultUtil.error("空文件异常");
+        }else if(result.equals("500")){
+            return ResultUtil.error("上传失败");
+        }else if (result.equals("401")){
+            return ResultUtil.error("文件格式不符");
         }
         else {
-            return ResultUtil.error(result);
+            bookService.insertBook(book);
+            bookService.setUrl(name,author,result);
+            System.out.println("upload-success");
+            return ResultUtil.data(null," 上传成功");
         }
     }
 
@@ -60,7 +65,7 @@ public class FileController {
     public Result download(HttpServletRequest request, HttpServletResponse response,
                            @RequestParam(value = "bookName",required = false) String bookName,
                             @RequestParam(value = "author",required = false)String author) throws IOException{
-        String fileName = bookName+"BY"+author+".txt";
+        String fileName = bookService.getUrl(bookName,author);
         System.out.println(fileName);
         String result=FileUtil.download(response, request, fileName);
         if(result.equals("download-success")){

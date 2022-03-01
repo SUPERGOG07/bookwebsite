@@ -46,4 +46,14 @@
         order by hot
     </select>
 
+    <insert id="setUrl" >
+        insert into bookweb.booktype(bookName,author,url)
+        values (#{bookName},#{author},#{url})
+    </insert>
+    
+    <select id="getUrl" resultType="java.lang.String">
+        select t.url from bookweb.booktype t
+        where bookName = #{bookName} and author = #{author}
+    </select>
+
 </mapper>
