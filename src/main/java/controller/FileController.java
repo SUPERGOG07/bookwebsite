@@ -2,10 +2,7 @@ package controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pojo.Books;
 import service.AdminService;
@@ -30,14 +27,27 @@ public class FileController {
     AdminService adminService;
 
     //upload
-    @RequestMapping(value = "/upload",method = {RequestMethod.POST})
-    public Result upload(HttpServletRequest request,
-                         @RequestParam("bookName") String bookName,@RequestParam("author") String author,
-                         @RequestParam("sort") String sort,@RequestParam("sumIntro") String sumIntro,
-                         @RequestParam("file") MultipartFile file) throws IOException {
+    @RequestMapping (value = "/upload",method = {RequestMethod.POST})
 
-        String result= FileUtil.upload(file,request);
+    public Result upload(HttpServletRequest request,
+                         @RequestParam(value = "name",required = false)String name,
+                         @RequestParam(value = "author",required = false)String author,
+                         @RequestParam(value = "sort",required = false)String sort,
+                         @RequestParam(value = "intro",required = false)String intro,
+                         @RequestParam(value = "file",required = false) MultipartFile file) throws IOException {
+
+        System.out.println(name+" "+author+" "+sort);
+        System.out.println(intro);
+        System.out.println(!file.isEmpty());
+        if(!bookService.checkBook(name,author).isEmpty()){
+            return ResultUtil.error("已存在同样书籍");
+        }
+        Books book = new Books(name,null,intro,sort,author,"T");
+
+        String result= FileUtil.upload(file,request,author);
         if(result.equals("upload-success")){
+            bookService.insertBook(book);
+            System.out.println("upload-success");
             return ResultUtil.data(null,result);
         }
         else {
@@ -48,8 +58,10 @@ public class FileController {
     //download
     @RequestMapping(value = "/download",method = {RequestMethod.POST})
     public Result download(HttpServletRequest request, HttpServletResponse response,
-                           @RequestParam("fileName") String fileName) throws IOException{
-
+                           @RequestParam(value = "bookName",required = false) String bookName,
+                            @RequestParam(value = "author",required = false)String author) throws IOException{
+        String fileName = bookName+"BY"+author+".txt";
+        System.out.println(fileName);
         String result=FileUtil.download(response, request, fileName);
         if(result.equals("download-success")){
             return ResultUtil.data(null,result);

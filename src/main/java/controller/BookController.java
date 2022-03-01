@@ -23,7 +23,7 @@ public class BookController {
     //get books
     @RequestMapping(value = "/books",method = {RequestMethod.GET})
     public Result getBook(){
-        if(bookService.selectAllBooks()!=null){
+        if(!bookService.selectAllBooks().isEmpty()){
             List<Books> booksList = bookService.selectAllBooks();
             return ResultUtil.data(booksList,"success");
         }
@@ -33,7 +33,7 @@ public class BookController {
     //get books by sort
     @RequestMapping(value = "/books/sort/{sort}",method = {RequestMethod.POST})
     public Result getBookBySort(@PathVariable String sort){
-        if(bookService.selectBookBySort(sort)!=null){
+        if(!bookService.selectBookBySort(sort).isEmpty()){
             List<Books> booksList = bookService.selectBookBySort(sort);
             return ResultUtil.data(booksList,"success");
         }
@@ -44,7 +44,7 @@ public class BookController {
         @RequestMapping(value = "/books/limit/{index}",method = {RequestMethod.POST})
     public Result getBookByLimit(@PathVariable int index){
         int pageSize=4;
-        if(bookService.selectBookByLimit(index,pageSize)!=null){
+        if(!bookService.selectBookByLimit(index,pageSize).isEmpty()){
             List<Books> booksList = bookService.selectBookByLimit(index,pageSize);
             return ResultUtil.data(booksList,"success");
         }

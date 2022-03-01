@@ -10,5 +10,20 @@
         where email=#{email} and pwd=#{pwd}
     </select>
 
+    <select id="checkBook" resultType="Books">
+        select * from bookweb.books
+        where oncheck = 'T'
+    </select>
+
+    <update id="passBook">
+        update bookweb.books
+        set oncheck = 'F'
+        where bookName=#{bookName} and author=#{author}
+    </update>
+
+    <delete id="notPassBook">
+        delete from bookweb.books
+        where bookName =#{bookName} and author=#{author}
+    </delete>
 
 </mapper>

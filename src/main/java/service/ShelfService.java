@@ -10,8 +10,8 @@ public interface ShelfService {
     List<Books> viewShelf(String email);
 
     //shelf add
-    int shelfAdd(String email,String bookName);
+    int shelfAdd(String email,String bookName,String author);
 
     //shelf delete
-    int shelfDelete(String email,String bookName);
+    int shelfDelete(String email,String bookName,String author);
 }

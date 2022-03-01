@@ -9,22 +9,22 @@
         select b.* from bookweb.books b
         inner join bookweb.bookshelf s
         on b.bookName = s.bookName
-        where s.email = #{email}
+        where s.email = #{email} and b.oncheck = 'F'
     </select>
 
     <insert id="shelfAdd" >
-        insert into bookweb.bookshelf(email,bookName)
-        values (#{email},#{bookName})
+        insert into bookweb.bookshelf(email,bookName,author)
+        values (#{email},#{bookName},#{author})
     </insert>
 
     <select id="shelfCheck" resultType="java.lang.String">
         select s.bookName from bookweb.bookshelf s
-        where s.email=#{email} and s.bookName =#{bookName}
+        where s.email=#{email} and s.bookName =#{bookName} and s.author = #{author}
     </select>
 
     <delete id="shelfDelete" >
         delete from bookweb.bookshelf
-        where email=#{email} and bookName=#{bookName}
+        where email=#{email} and bookName=#{bookName} and author = #{author}
     </delete>
 
 

@@ -32,8 +32,33 @@ public class BookServiceImpl implements BookService{
     @Override
     public List<Books> selectBookByLimit(int startIndex, int pageSize) {
         Map<String,Integer> map = new HashMap<String,Integer>();
-        map.put("startIndex",startIndex-1);
+        map.put("startIndex",(startIndex-1)*pageSize);
         map.put("pageSize",pageSize);
         return bookMapper.selectBookByLimit(map);
+    }
+
+    @Transactional
+    @Override
+    public int insertBook(Books book) {
+        return bookMapper.insertBook(book);
+    }
+
+    @Transactional
+    @Override
+    public List<Books> search(String likeName) {
+        String newLikeName = "%"+likeName+"%";
+        if(!bookMapper.bookLikeName(newLikeName).isEmpty()){
+            return bookMapper.bookLikeName(newLikeName);
+        }
+        else if(!bookMapper.bookLikeAuthor(newLikeName).isEmpty()){
+            return bookMapper.bookLikeAuthor(newLikeName);
+        }
+        else return null;
+    }
+
+    @Transactional
+    @Override
+    public List<Books> checkBook(String bookName, String author) {
+        return bookMapper.checkBook(bookName,author);
     }
 }

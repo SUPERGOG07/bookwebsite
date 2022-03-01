@@ -23,9 +23,9 @@ public class ShelfServiceImpl implements ShelfService{
 
     @Transactional
     @Override
-    public int shelfAdd(String email, String bookName) {
-        if(shelfMapper.shelfCheck(email, bookName)!=null){
-            return shelfMapper.shelfAdd(email, bookName);
+    public int shelfAdd(String email, String bookName,String author) {
+        if(shelfMapper.shelfCheck(email, bookName,author)==null){
+            return shelfMapper.shelfAdd(email, bookName,author);
         }
         else{
             return -1;
@@ -34,9 +34,9 @@ public class ShelfServiceImpl implements ShelfService{
 
     @Transactional
     @Override
-    public int shelfDelete(String email, String bookName) {
-        if(shelfMapper.shelfCheck(email, bookName)!=null){
-            return shelfMapper.shelfDelete(email, bookName);
+    public int shelfDelete(String email, String bookName,String author) {
+        if(shelfMapper.shelfCheck(email, bookName,author)!=null){
+            return shelfMapper.shelfDelete(email, bookName,author);
         }
         else{
             return -1;

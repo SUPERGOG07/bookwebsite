@@ -1,6 +1,7 @@
 package dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import pojo.Books;
 
 import java.util.List;
@@ -12,8 +13,8 @@ public interface BookMapper {
     //select all
     List<Books> selectAllBooks();
 
-    //select by name
-    List<Books> selectBookByName(String name);
+    //check book
+    List<Books> checkBook(@Param("bookName") String bookName, @Param("author") String author);
 
     //select by sort
     List<Books> selectBookBySort(String sort);
@@ -22,10 +23,14 @@ public interface BookMapper {
     int insertBook(Books book);
 
     //delete book
-    int deleteBook(String name);
-
+    int deleteBook(String bookName);
 
     //limit select book
     List<Books> selectBookByLimit(Map<String,Integer> map);
 
+    //select like name
+    List<Books> bookLikeName(String likeName);
+
+    //select like author
+    List<Books> bookLikeAuthor(String likeName);
 }

@@ -27,4 +27,14 @@ public class MyTest {
         boolean result=(true&&false);
         System.out.println(result);
     }
+    @Test
+    public void test03(){
+        System.out.println("你好，世界");
+    }
+    @Test
+    public void test04(){
+        String a = "abc.txt";
+        String b = a.substring(0,a.length()-4);
+        System.out.println(b);
+    }
 }

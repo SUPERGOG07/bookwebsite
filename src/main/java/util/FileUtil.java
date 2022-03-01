@@ -10,11 +10,11 @@ import java.net.URLEncoder;
 
 public class FileUtil {
 
-    public static String upload(MultipartFile file, HttpServletRequest request) throws IOException {
-        String fileName = file.getOriginalFilename();
-        if("".equals(fileName)){
+    public static String upload(MultipartFile file, HttpServletRequest request,String author) throws IOException {
+        if("".equals(file.getOriginalFilename())){
             return "空文件异常";
         }
+        String fileName = file.getOriginalFilename().substring(0,file.getOriginalFilename().length()-4)+"BY"+author+".txt";
         System.out.println("上传文件:"+fileName);
         String path = request.getSession().getServletContext().getRealPath("/upload");
         File realPath = new File(path);
@@ -44,12 +44,12 @@ public class FileUtil {
     }
 
     public static String download(HttpServletResponse response,HttpServletRequest request,String fileName) throws IOException{
-        String path = request.getSession().getServletContext().getRealPath("/download");
+        String path = request.getSession().getServletContext().getRealPath("/upload");
 
         //1、设置response 响应头
         response.reset(); //设置页面不缓存,清空buffer
         response.setCharacterEncoding("UTF-8"); //字符编码
-        response.setContentType("multipart/form-data"); //二进制传输数据
+        response.setContentType("application/octet-stream;charset=UTF-8"); //二进制传输数据
         //设置响应头
         response.setHeader("Content-Disposition","attachment;fileName="+ URLEncoder.encode(fileName, "UTF-8"));
 

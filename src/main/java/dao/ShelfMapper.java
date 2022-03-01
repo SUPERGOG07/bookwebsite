@@ -12,12 +12,12 @@ public interface ShelfMapper {
     List<Books> viewShelf(String email);
 
     //shelf add
-    int shelfAdd(@Param("email") String email,@Param("bookName") String bookName);
+    int shelfAdd(@Param("email") String email,@Param("bookName") String bookName,@Param("author") String author);
 
     //check shelf
-    String shelfCheck(@Param("email") String email,@Param("bookName") String bookName);
+    String shelfCheck(@Param("email") String email,@Param("bookName") String bookName,@Param("author") String author);
 
     //shelf delete
-    int shelfDelete(@Param("email") String email,@Param("bookName") String bookName);
+    int shelfDelete(@Param("email") String email,@Param("bookName") String bookName,@Param("author") String author);
 
 }

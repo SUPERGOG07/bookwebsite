@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pojo.Admin;
 import pojo.User;
 import service.AdminService;
+import service.BookService;
 import service.ShelfService;
 import service.UserService;
 import util.RegexUtil;
@@ -29,9 +30,12 @@ public class UserController {
     @Qualifier("ShelfServiceImpl")
     private ShelfService shelfService;
 
+    @Autowired
+    @Qualifier("BookServiceImpl")
+    private BookService bookService;
+
     //login
     @RequestMapping(value = "/login/{email}/{pwd}",method = {RequestMethod.POST})
-
     public Result login(@PathVariable String email, @PathVariable String pwd)  {
         System.out.println(email+"  "+pwd);
 
@@ -92,30 +96,41 @@ public class UserController {
     public Result viewShelf(@PathVariable String email){
         System.out.println("shelf-view");
 
-        if(shelfService.viewShelf(email)!=null){
+        if(!shelfService.viewShelf(email).isEmpty()){
             return ResultUtil.data(shelfService.viewShelf(email),"success");
         }
         return ResultUtil.error("找不到书");
     }
 
     //shelf add
-    @RequestMapping(value = "/shelf/add/{email}/{bookName}",method = {RequestMethod.POST})
-    public Result shelfAdd(@PathVariable String email,@PathVariable String bookName){
+    @RequestMapping(value = "/shelf/add/{email}/{bookName}/{author}",method = {RequestMethod.POST})
+    public Result shelfAdd(@PathVariable String email,@PathVariable String bookName,@PathVariable String author){
+        System.out.println(email+"  "+bookName+" "+author);
         System.out.println("shelf-add");
-        if(shelfService.shelfAdd(email, bookName)!=-1){
+        if(shelfService.shelfAdd(email, bookName,author)!=-1){
             return ResultUtil.data(null,"shelf-add-success");
         }
         return ResultUtil.error("shelf-add-failed");
     }
 
     //shelf delete
-    @RequestMapping(value = "/shelf/delete/{email}/{bookName}",method = {RequestMethod.POST})
-    public Result shelfDelete(@PathVariable String email,@PathVariable String bookName){
+    @RequestMapping(value = "/shelf/delete/{email}/{bookName}/{author}",method = {RequestMethod.POST})
+    public Result shelfDelete(@PathVariable String email,@PathVariable String bookName,@PathVariable String author){
         System.out.println("shelf-delete");
-        if(shelfService.shelfDelete(email, bookName)!=-1){
+        if(shelfService.shelfDelete(email, bookName,author)!=-1){
             return ResultUtil.data(null,"shelf-delete-success");
         }
         return ResultUtil.data("shelf-delete-failed");
+    }
+
+    //search
+    @RequestMapping(value = "/search/{likeName}",method = {RequestMethod.GET})
+    public Result bookSearch(@PathVariable String likeName){
+        System.out.println("search:"+likeName);
+        if(bookService.search(likeName)!=null){
+            return ResultUtil.data(bookService.search(likeName),"search-success");
+        }
+        else return ResultUtil.error("search-failed");
     }
 
 

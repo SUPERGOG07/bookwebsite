@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class Books {
     String bookName;
     String ptUrl;
-    String txtUrl;
     String sumIntro;
     String sort;
     String author;

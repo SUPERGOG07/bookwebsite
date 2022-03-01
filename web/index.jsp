@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/bookwebsite_war_exploded/download" method="post">
+<form action="/bookwebsite_war_exploded/download"  method="post">
     <input type="text" name="fileName"><br><br><br>
     <input type="submit" value="download">
 </form>
