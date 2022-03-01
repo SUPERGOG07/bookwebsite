@@ -12,9 +12,6 @@ public interface BookService {
     //select by sort
     List<Books> selectBookBySort(String sort);
 
-    //limit select
-    List<Books> selectBookByLimit(int startIndex,int pageSize);
-
     //add book
     int insertBook(Books book);
 

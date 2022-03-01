@@ -24,18 +24,6 @@
         values (#{bookName},#{ptUrl},#{sumIntro},
                 #{sort},#{author},#{onCheck})
     </insert>
-
-    <delete id="deleteBook" parameterType="java.lang.String">
-        delete from bookweb.books
-        where bookNname=#{bookName}
-    </delete>
-
-
-    <select id="selectBookByLimit" parameterType="map" resultType="Books">
-        select * from bookweb.books
-            where oncheck = 'F'
-            limit #{startIndex},#{pageSize}
-    </select>
     
     <select id="bookLikeName" parameterType="java.lang.String" resultType="Books">
         select * from bookweb.books

@@ -40,16 +40,5 @@ public class BookController {
         return ResultUtil.error("fail");
     }
 
-    //get books by limit
-        @RequestMapping(value = "/books/limit/{index}",method = {RequestMethod.POST})
-    public Result getBookByLimit(@PathVariable int index){
-        int pageSize=4;
-        if(!bookService.selectBookByLimit(index,pageSize).isEmpty()){
-            List<Books> booksList = bookService.selectBookByLimit(index,pageSize);
-            return ResultUtil.data(booksList,"success");
-        }
-        return ResultUtil.error("fail");
-    }
-
 
 }

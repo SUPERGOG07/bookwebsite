@@ -43,10 +43,10 @@ public class UserController {
             Admin admin=new Admin(email,pwd);
             if(adminService.adminLogin(admin)!=null){                //验证是否是管理员
                 System.out.println("Admin-Login");
-                return ResultUtil.data(admin,"admin-login");          //如果是，返回msg:admin
+                return ResultUtil.data(admin,"管理员登陆成功");          //如果是，返回msg:admin
             }
             else{
-                return ResultUtil.error("admin-login-failed");               //如果不是，返回error
+                return ResultUtil.error("管理员登陆失败");               //如果不是，返回error
             }
         }
 
@@ -97,7 +97,7 @@ public class UserController {
         System.out.println("shelf-view");
 
         if(!shelfService.viewShelf(email).isEmpty()){
-            return ResultUtil.data(shelfService.viewShelf(email),"success");
+            return ResultUtil.data(shelfService.viewShelf(email),"查看成功");
         }
         return ResultUtil.error("找不到书");
     }
@@ -108,9 +108,12 @@ public class UserController {
         System.out.println(email+"  "+bookName+" "+author);
         System.out.println("shelf-add");
         if(shelfService.shelfAdd(email, bookName,author)!=-1){
-            return ResultUtil.data(null,"shelf-add-success");
+            return ResultUtil.data(null,"添加成功");
         }
-        return ResultUtil.error("shelf-add-failed");
+        else if(shelfService.shelfAdd(email, bookName, author)==-1){
+            return ResultUtil.error("书架有这本书了");
+        }
+        return ResultUtil.error("添加失败");
     }
 
     //shelf delete
@@ -118,9 +121,9 @@ public class UserController {
     public Result shelfDelete(@PathVariable String email,@PathVariable String bookName,@PathVariable String author){
         System.out.println("shelf-delete");
         if(shelfService.shelfDelete(email, bookName,author)!=-1){
-            return ResultUtil.data(null,"shelf-delete-success");
+            return ResultUtil.data(null,"书架删除成功");
         }
-        return ResultUtil.data("shelf-delete-failed");
+        return ResultUtil.data("书架删除失败");
     }
 
     //search
@@ -128,9 +131,9 @@ public class UserController {
     public Result bookSearch(@PathVariable String likeName){
         System.out.println("search:"+likeName);
         if(bookService.search(likeName)!=null){
-            return ResultUtil.data(bookService.search(likeName),"search-success");
+            return ResultUtil.data(bookService.search(likeName),"查询成功");
         }
-        else return ResultUtil.error("search-failed");
+        else return ResultUtil.error("查询失败");
     }
 
 

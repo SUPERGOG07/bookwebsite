@@ -30,15 +30,6 @@ public class BookServiceImpl implements BookService{
 
     @Transactional
     @Override
-    public List<Books> selectBookByLimit(int startIndex, int pageSize) {
-        Map<String,Integer> map = new HashMap<String,Integer>();
-        map.put("startIndex",(startIndex-1)*pageSize);
-        map.put("pageSize",pageSize);
-        return bookMapper.selectBookByLimit(map);
-    }
-
-    @Transactional
-    @Override
     public int insertBook(Books book) {
         return bookMapper.insertBook(book);
     }

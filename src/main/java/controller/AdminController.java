@@ -20,9 +20,9 @@ public class AdminController {
     @RequestMapping(value = "/checkbook",method = {RequestMethod.GET})
     public Result checkBook(){
         if(!adminService.checkBook().isEmpty()){
-            return ResultUtil.data(adminService.checkBook(),"check-success");
+            return ResultUtil.data(adminService.checkBook(),"查看成功");
         }
-        return ResultUtil.error("check-failed");
+        return ResultUtil.error("查看失败");
     }
 
 

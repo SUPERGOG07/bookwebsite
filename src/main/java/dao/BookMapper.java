@@ -22,9 +22,6 @@ public interface BookMapper {
     //add book
     int insertBook(Books book);
 
-    //delete book
-    int deleteBook(String bookName);
-
     //limit select book
     List<Books> selectBookByLimit(Map<String,Integer> map);
 
