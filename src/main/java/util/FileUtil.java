@@ -78,5 +78,18 @@ public class FileUtil {
 
     }
 
+    public static String delete(HttpServletRequest request,String bookName,String author){
+        String path=request.getSession().getServletContext().getRealPath("/upload");
+        File file = new File(path);
+        if(!file.exists()){
+            return "文件不存在";
+        }
+        else if(file.isFile()){
+            file.delete();
+            return "success";
+        }else {
+            return "删除失败";
+        }
+    }
 
 }
