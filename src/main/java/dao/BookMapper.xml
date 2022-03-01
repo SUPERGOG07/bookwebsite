@@ -20,9 +20,9 @@
     </select>
 
     <insert id="insertBook" parameterType="Books">
-        insert into bookweb.books(bookName,ptUrl,sumIntro,sort,author,oncheck)
+        insert into bookweb.books(bookName,ptUrl,sumIntro,sort,author,oncheck,hot)
         values (#{bookName},#{ptUrl},#{sumIntro},
-                #{sort},#{author},#{onCheck})
+                #{sort},#{author},#{onCheck},#{hot})
     </insert>
     
     <select id="bookLikeName" parameterType="java.lang.String" resultType="Books">
@@ -33,6 +33,17 @@
     <select id="bookLikeAuthor" parameterType="java.lang.String" resultType="Books">
         select * from bookweb.books
         where author like #{likeName} and oncheck = 'F'
+    </select>
+
+    <update id="riseHot" >
+        update bookweb.books
+        set hot = hot + 1
+        where bookName=#{bookName} and author=#{author}
+    </update>
+
+    <select id="selectByHot" resultType="Books">
+        select * from bookweb.books
+        order by hot
     </select>
 
 </mapper>

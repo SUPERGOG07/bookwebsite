@@ -42,7 +42,7 @@ public class FileController {
         if(!bookService.checkBook(name,author).isEmpty()){
             return ResultUtil.error("已存在同样书籍");
         }
-        Books book = new Books(name,null,intro,sort,author,"T");
+        Books book = new Books(name,null,intro,sort,author,"T",0);
 
         String result= FileUtil.upload(file,request,author);
         if(result.equals("upload-success")){
@@ -64,6 +64,7 @@ public class FileController {
         System.out.println(fileName);
         String result=FileUtil.download(response, request, fileName);
         if(result.equals("download-success")){
+            bookService.riseHot(bookName, author);
             return ResultUtil.data(null,result);
         }
         else {

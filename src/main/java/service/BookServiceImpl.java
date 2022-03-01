@@ -52,4 +52,15 @@ public class BookServiceImpl implements BookService{
     public List<Books> checkBook(String bookName, String author) {
         return bookMapper.checkBook(bookName,author);
     }
+
+    @Transactional
+    @Override
+    public int riseHot(String bookName, String author) {
+        return bookMapper.riseHot(bookName, author);
+    }
+
+    @Override
+    public List<Books> selectByHot() {
+        return bookMapper.selectByHot();
+    }
 }

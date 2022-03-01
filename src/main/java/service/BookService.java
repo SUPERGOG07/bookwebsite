@@ -20,4 +20,10 @@ public interface BookService {
 
     //check book
     List<Books> checkBook( String bookName, String author);
+
+    //rise hot
+    int riseHot(String bookName,String author);
+
+    //select by hot
+    List<Books> selectByHot();
 }

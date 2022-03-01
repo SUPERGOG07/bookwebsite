@@ -14,4 +14,5 @@ public class Books {
     String sort;
     String author;
     String onCheck;
+    int hot;
 }

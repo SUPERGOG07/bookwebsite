@@ -14,6 +14,11 @@ public class ShelfServiceImpl implements ShelfService{
         this.shelfMapper = shelfMapper;
     }
 
+    BookMapper bookMapper;
+
+    public void setBookMapper(BookMapper bookMapper) {
+        this.bookMapper = bookMapper;
+    }
 
     @Transactional
     @Override
@@ -25,6 +30,7 @@ public class ShelfServiceImpl implements ShelfService{
     @Override
     public int shelfAdd(String email, String bookName,String author) {
         if(shelfMapper.shelfCheck(email, bookName,author)==null){
+            bookMapper.riseHot(bookName, author);
             return shelfMapper.shelfAdd(email, bookName,author);
         }
         else{

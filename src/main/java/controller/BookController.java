@@ -40,5 +40,14 @@ public class BookController {
         return ResultUtil.error("fail");
     }
 
+    //hot
+    @RequestMapping(value = "/hot",method = {RequestMethod.GET})
+    public Result hot(){
+        if(!bookService.selectByHot().isEmpty()){
+            return ResultUtil.data(bookService.selectByHot(),"success");
+        }
+        else return ResultUtil.error("failed");
+    }
+
 
 }

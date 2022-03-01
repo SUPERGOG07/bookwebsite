@@ -30,4 +30,10 @@ public interface BookMapper {
 
     //select like author
     List<Books> bookLikeAuthor(String likeName);
+
+    //rise hot
+    int riseHot(@Param("bookName") String bookName,@Param("author") String author);
+
+    //select by hot
+    List<Books> selectByHot();
 }

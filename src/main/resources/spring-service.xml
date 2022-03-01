@@ -20,6 +20,7 @@
     </bean>
     <bean id="ShelfServiceImpl" class="service.ShelfServiceImpl">
         <property name="shelfMapper" ref="shelfMapper"/>
+        <property name="bookMapper" ref="bookMapper"/>
     </bean>
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
