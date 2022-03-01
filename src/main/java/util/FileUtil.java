@@ -16,9 +16,9 @@ public class FileUtil {
         if ("".equals(originFileName)) {
             return "400";    //空文件异常
         }
-        if(FilenameUtils.getExtension(originFileName)!="txt"){
-            if(FilenameUtils.getExtension(originFileName)!="pdf"){
-                if (FilenameUtils.getExtension(originFileName)!="docx"){
+        if(!FilenameUtils.getExtension(originFileName).equals("txt")){
+            if(!FilenameUtils.getExtension(originFileName).equals("pdf")){
+                if (!FilenameUtils.getExtension(originFileName).equals("docx")){
                     return "401";
                 }
             }
